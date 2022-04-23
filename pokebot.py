@@ -67,6 +67,7 @@ async def on_ready():
 async def on_message(message):
     if message.author == client.user:
         return
+        
     if message.content.startswith('$overview'):
         for word in message.content.split():
             if word in pokemon_names:
@@ -87,18 +88,21 @@ async def on_message(message):
                 pokemon_data = requests.get("https://pokeapi.co/api/v2/pokemon/" + word)
                 pokemon_json = pokemon_data.json()
                 await message.channel.send(word + " weights about " + str(pokemon_json['weight']) + " KG!")
+
     elif message.content.startswith('$abilities'):
         for word in message.content.split():
             if word in pokemon_names:
                 pokemon_data = requests.get("https://pokeapi.co/api/v2/pokemon/" + word)
                 pokemon_json = pokemon_data.json()
                 await message.channel.send(word + " has the special abilities of " + pokemon_json['abilities'][0]['ability']['name'] + '.')
+
     elif message.content.startswith('$type'):
         for word in message.content.split():
             if word in pokemon_names: 
                 pokemon_data = requests.get("https://pokeapi.co/api/v2/pokemon/" + word)
                 pokemon_json = pokemon_data.json()
                 await message.channel.send(word + " is a " + pokemon_json['types'][0]['type']['name'] + " type Pokemon!")
+
     elif message.content.startswith('$moves'):
         for word in message.content.split(): 
             if word in pokemon_names: 
